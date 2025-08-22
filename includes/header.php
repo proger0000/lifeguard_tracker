@@ -211,6 +211,7 @@ if (!function_exists('get_role_name_ukrainian')) {
             padding-left: var(--safe-area-inset-left);
             padding-right: var(--safe-area-inset-right);
             padding-bottom: 2px;
+            margin-top: auto; /* Додає відступ зверху, щоб футер прилипав до низу */
         }
 
         /* Адаптация для iOS с "монобровью" */
