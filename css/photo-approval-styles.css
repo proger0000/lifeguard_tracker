@@ -1,0 +1,345 @@
+/* =======================================================
+   Photo Approval Cards - Modern Design Styles
+   Подключить после основных Tailwind CSS стилей
+   ======================================================= */
+
+/* Интеграция с основным дизайном - шрифт уже импортирован в main-styles.css */
+
+/* Безопасные зоны для iOS */
+:root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    --primary-gradient: linear-gradient(135deg, #DC2626 0%, #F97316 100%);
+    --success-gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    --warning-gradient: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    --danger-gradient: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    --info-gradient: linear-gradient(135deg, #6366F1 0%, #3B82F6 100%);
+}
+
+/* Применение единого дизайна для секции фото */
+.photo-approval-section {
+    font-family: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 1rem;
+    padding-top: calc(1rem + var(--safe-area-inset-top));
+    padding-bottom: calc(1rem + var(--safe-area-inset-bottom));
+    background: var(--background-color, #F9FAFB);
+}
+
+/* Фиксированные элементы с учетом безопасных зон */
+.photo-approval-section .fixed-top {
+    top: var(--safe-area-inset-top);
+    padding-top: max(0.5rem, var(--safe-area-inset-top));
+}
+
+.photo-approval-section .fixed-bottom {
+    bottom: var(--safe-area-inset-bottom);
+    padding-bottom: max(0.5rem, var(--safe-area-inset-bottom));
+}
+
+/* Основной контент с отступами */
+.photo-approval-section main {
+    margin-top: calc(var(--safe-area-inset-top) + 3.5rem);
+    margin-bottom: calc(var(--safe-area-inset-bottom) + 1rem);
+}
+
+.photo-approval-section h1,
+.photo-approval-section h2,
+.photo-approval-section h3,
+.photo-approval-section h4,
+.photo-approval-section h5,
+.photo-approval-section h6 {
+    font-family: 'Comforta', sans-serif;
+    font-weight: 600;
+}
+
+/* Карточки фото с единым дизайном */
+.photo-card {
+    margin-bottom: 1rem;
+    transition: var(--transition-normal);
+    transform-origin: center;
+    will-change: transform, box-shadow;
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.photo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Градиентные фоны для статус-бейджей */
+.status-badge-pending {
+    background: var(--warning-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.status-badge-approved {
+    background: var(--success-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.status-badge-waiting {
+    background: var(--warning-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+/* Контейнер фото */
+.photo-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    aspect-ratio: 16/9;
+}
+
+.photo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Улучшенные кнопки */
+.btn-modern {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin: 0.5rem;
+}
+
+.btn-approve {
+    background: var(--success-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+.btn-reject {
+    background: var(--danger-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* Анимация для карточек */
+.animated-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-modern:hover .animated-icon {
+    transform: scale(1.1);
+}
+
+/* Улучшенные select элементы */
+.select-modern {
+    font-family: 'Comforta', sans-serif;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.select-modern:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+}
+
+/* Модальное окно */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    padding-top: calc(1rem + var(--safe-area-inset-top));
+    padding-bottom: calc(1rem + var(--safe-area-inset-bottom));
+}
+
+.modal-content {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Стили для информационных блоков */
+.info-block {
+    position: relative;
+    overflow: hidden;
+}
+
+.info-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+}
+
+/* Стили для пустого состояния */
+.empty-state {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стили для загрузки */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Улучшенные отступы и типографика */
+.photo-approval-section .text-xs {
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.photo-approval-section .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.photo-approval-section .text-base {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.photo-approval-section .text-lg {
+    font-size: 1.125rem;
+    line-height: 1.5;
+}
+
+.photo-approval-section .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.4;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 640px) {
+    .photo-approval-section {
+        padding: 0.5rem;
+        padding-top: calc(0.5rem + var(--safe-area-inset-top));
+        padding-bottom: calc(0.5rem + var(--safe-area-inset-bottom));
+    }
+
+    .photo-card {
+        margin: 0.5rem 0;
+    }
+
+    .btn-modern {
+        padding: 0.5rem 1rem;
+        margin: 0.25rem;
+    }
+}
+
+/* Темная тема (опционально) */
+@media (prefers-color-scheme: dark) {
+    .photo-approval-section {
+        background-color: #1a1a1a;
+    }
+
+    .photo-card {
+        background: #2d2d2d;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content {
+        background: #2d2d2d;
+        color: white;
+    }
+}
+
+/* Дополнительные утилиты */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Универсальные градиентные кнопки и бейджи */
+.btn-gradient {
+    background: var(--primary-gradient);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    border: none;
+}
+.btn-gradient-success {
+    background: var(--success-gradient);
+}
+.btn-gradient-warning {
+    background: var(--warning-gradient);
+}
+.btn-gradient-danger {
+    background: var(--danger-gradient);
+}
+.btn-gradient-info {
+    background: var(--info-gradient);
+}
+.status-badge-gradient {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    font-weight: 600;
+    padding: 0.25em 0.75em;
+    border-radius: 1em;
+    font-size: 0.9em;
+    background: var(--primary-gradient);
+}
+.status-badge-gradient-success {
+    background: var(--success-gradient);
+}
+.status-badge-gradient-warning {
+    background: var(--warning-gradient);
+}
+.status-badge-gradient-danger {
+    background: var(--danger-gradient);
+}
+.status-badge-gradient-info {
+    background: var(--info-gradient);
+}
