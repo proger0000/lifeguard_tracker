@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once 'includes/header.php';
 ?>
 
-<div class="flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8 text-white" style="min-height: calc(100vh - 160px);">
+<main class="flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8 text-white">
     <div class="max-w-md w-full space-y-6 glass-effect p-6 sm:p-8">
         <div>
             <h2 class="mt-4 text-center text-2xl sm:text-3xl font-bold text-white">
@@ -109,7 +109,7 @@ require_once 'includes/header.php';
             </p>
         </form>
     </div>
-</div>
+</main>
 
 <?php require_once 'includes/footer.php'; ?>
 </body>
