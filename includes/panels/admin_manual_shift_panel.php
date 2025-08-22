@@ -256,7 +256,7 @@ function formatModalTime(timeString) {
             </div>
         <?php endif; ?>
 
-        <div class="manual-open-shift-section p-3 bg-white/50 rounded-lg border border-gray-200/50">
+        <div class="manual-open-shift-section p-3 bg-white rounded-lg border border-gray-200">
             <h4 class="text-sm font-semibold text-gray-800 mb-3 border-b border-gray-200/70 pb-2">
                 <i class="fas fa-play-circle mr-2 text-green-500"></i>Відкрити Зміну Вручну
             </h4>
@@ -314,7 +314,7 @@ function formatModalTime(timeString) {
 
         <hr class="my-5 border-gray-300/50">
 
-        <div class="manual-close-shift-section p-3 bg-white/50 rounded-lg border border-gray-200/50">
+        <div class="manual-close-shift-section p-3 bg-white rounded-lg border border-gray-200">
             <h4 class="text-sm font-semibold text-gray-800 mb-3 border-b border-gray-200/70 pb-2">
                 <i class="fas fa-stop-circle mr-2 text-red-500"></i>Закрити Активну Зміну Вручну
             </h4>
@@ -354,21 +354,6 @@ function formatModalTime(timeString) {
             <?php endif; ?>
         </div>
         
-        <hr class="my-5 border-gray-300/50">
-
-        <div class="manage-shifts-section p-3 bg-white/50 rounded-lg border border-gray-200/50">
-            <h4 class="text-sm font-semibold text-gray-800 mb-3 border-b border-gray-200/70 pb-2">
-                <i class="fas fa-search-location mr-2 text-sky-500"></i>Знайти та Керувати Змінами
-            </h4>
-            <p class="text-xs text-gray-600 mb-3">
-                Для розширеного пошуку, детального редагування або видалення конкретних змін (минулих або активних), будь ласка, перейдіть до спеціалізованого розділу керування змінами.
-            </p>
-            <a href="<?php echo $form_action_base_url; ?>/admin/manage_shifts.php" class="btn-secondary !text-sm !py-1.5 !px-3 w-full sm:w-auto">
-                <i class="fas fa-tasks mr-1"></i> Перейти до Керування
-            </a>
-            <p class="text-xs text-gray-600 mt-1.5">(Рекомендується для виправлення помилок або перегляду архівних даних)</p>
-        </div>
-
     </div>
 </div>
 
