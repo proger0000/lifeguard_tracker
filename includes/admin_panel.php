@@ -51,13 +51,14 @@ if (!function_exists('csrf_input')) { function csrf_input() { echo '<input type=
                     'duty'           => ['label' => 'Статус Змін', 'icon' => 'fa-clipboard-list', 'type' => 'tab'],
                     'manage_shifts'  => ['label' => 'Керування Змінами', 'icon' => 'fa-tools', 'type' => 'link', 'url' => rtrim(APP_URL, '/') . '/admin/manage_shifts.php'],
                     'shift_history'  => ['label' => 'Історія Змін', 'icon' => 'fa-history', 'type' => 'tab'],
+                    'divider1'       => ['type' => 'divider'],
                     'posts-analytics'=> ['label' => 'Аналітика Постів', 'icon' => 'fa-chart-pie', 'type' => 'tab'],
                     'payroll_rating' => ['label' => 'Рейтинг', 'icon' => 'fa-star', 'type' => 'tab'],
                     'salary_report'  => ['label' => 'Зарплати', 'icon' => 'fa-money-bill-wave', 'type' => 'tab'],
-                    'divider1'       => ['type' => 'divider'],
+                    'divider2'       => ['type' => 'divider'],
                     'posts'          => ['label' => 'Кер. Постами', 'icon' => 'fa-map-marker-alt', 'type' => 'tab'],
                     'users'          => ['label' => 'Користувачі', 'icon' => 'fa-users-cog', 'type' => 'tab'],
-                    'divider2'       => ['type' => 'divider'],
+                    'divider3'       => ['type' => 'divider'],
                     'applications'   => ['label' => 'Заявки', 'icon' => 'fa-inbox', 'type' => 'tab'],
                     'academy'        => ['label' => 'Академія', 'icon' => 'fa-graduation-cap', 'type' => 'tab']
                 ];
