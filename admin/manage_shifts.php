@@ -282,9 +282,9 @@ function render_action_buttons($shift_id, $is_mobile = false) {
 require_once '../includes/header.php';
 ?>
 
-<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-    <div class="w-full px-4 py-6">
-        <div class="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-200/50">
+<div class="min-h-screen bg-transparent">
+    <div class="container mx-auto px-4 py-6">
+        <div class="glass-effect rounded-2xl shadow-xl border border-white/20">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-800 flex items-center mb-2">
@@ -299,13 +299,13 @@ require_once '../includes/header.php';
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" id="openHoursModalBtn" class="bg-gradient-to-r from-blue-500 to-teal-500 text-white px-5 py-2.5 rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"><i class="fas fa-calculator mr-2"></i> Розрахунок годин</button>
+                    <button type="button" id="openHoursModalBtn" class="bg-blue-800 hover:bg-blue-900 text-white px-5 py-2.5 rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"><i class="fas fa-calculator mr-2"></i> Розрахунок годин</button>
                     <a href="<?php echo rtrim(APP_URL, '/'); ?>/index.php#admin-duty-content" class="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-5 py-2.5 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"><i class="fas fa-arrow-left mr-2"></i> До панелі</a>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200/50">
+        <div class="glass-effect rounded-2xl shadow-lg border border-white/20">
             <form action="manage_shifts.php" method="GET" id="filtersForm">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-800 flex items-center"><i class="fas fa-filter mr-2 text-indigo-500"></i>Фільтри пошуку</h3>
@@ -315,50 +315,50 @@ require_once '../includes/header.php';
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-4">
                         <div>
                             <label for="s_id_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-hashtag mr-1 text-gray-400"></i> ID Зміни</label>
-                            <input type="number" name="s_id" id="s_id_filter" value="<?php echo escape($filter_shift_id ?: ''); ?>" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Будь-який">
+                            <input type="number" name="s_id" id="s_id_filter" value="<?php echo escape($filter_shift_id ?: ''); ?>" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Будь-який">
                         </div>
                         <div>
                             <label for="s_year_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-calendar-alt mr-1 text-gray-400"></i> Рік</label>
-                            <select name="s_year" id="s_year_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <select name="s_year" id="s_year_filter" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                                 <option value="0">Всі роки</option>
                                 <?php foreach ($available_years_for_filter as $year_opt): ?><option value="<?php echo $year_opt; ?>" <?php echo ($filter_year == $year_opt) ? 'selected' : ''; ?>><?php echo $year_opt; ?></option><?php endforeach; ?>
                             </select>
                         </div>
                         <div>
                             <label for="s_month_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-calendar-day mr-1 text-gray-400"></i> Місяць</label>
-                            <select name="s_month" id="s_month_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <select name="s_month" id="s_month_filter" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                                 <option value="0">Всі місяці</option>
                                 <?php foreach ($months_ukrainian_filter as $num => $name): ?><option value="<?php echo $num; ?>" <?php echo ($filter_month == $num) ? 'selected' : ''; ?>><?php echo $name; ?></option><?php endforeach; ?>
                             </select>
                         </div>
                         <div>
                             <label for="s_day_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-calendar-check mr-1 text-gray-400"></i> День</label>
-                            <input type="number" name="s_day" id="s_day_filter" value="<?php echo $filter_day ?: ''; ?>" min="1" max="31" placeholder="Всі дні" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <input type="number" name="s_day" id="s_day_filter" value="<?php echo $filter_day ?: ''; ?>" min="1" max="31" placeholder="Всі дні" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         </div>
                         <div>
                             <label for="s_post_id_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-map-marker-alt mr-1 text-gray-400"></i> Пост</label>
-                            <select name="s_post_id" id="s_post_id_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <select name="s_post_id" id="s_post_id_filter" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                                 <option value="0">Всі пости</option>
                                 <?php foreach ($posts_for_filter as $post_f): ?><option value="<?php echo $post_f['id']; ?>" <?php echo ($filter_post_id == $post_f['id']) ? 'selected' : ''; ?>><?php echo escape($post_f['name']); ?></option><?php endforeach; ?>
                             </select>
                         </div>
                         <div>
                             <label for="s_user_id_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-user mr-1 text-gray-400"></i> Лайфгард</label>
-                            <select name="s_user_id" id="s_user_id_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <select name="s_user_id" id="s_user_id_filter" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                                 <option value="0">Всі лайфгарди</option>
                                 <?php foreach ($lifeguards_for_filter as $lg_f): ?><option value="<?php echo $lg_f['id']; ?>" <?php echo ($filter_user_id == $lg_f['id']) ? 'selected' : ''; ?>><?php echo escape($lg_f['full_name']); ?></option><?php endforeach; ?>
                             </select>
                         </div>
                         <div>
                             <label for="s_status_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-flag mr-1 text-gray-400"></i> Статус</label>
-                            <select name="s_status" id="s_status_filter" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <select name="s_status" id="s_status_filter" class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                                 <option value="">Всі статуси</option>
                                 <?php foreach ($shift_statuses as $key_status => $label_status): ?><option value="<?php echo $key_status; ?>" <?php echo ($filter_status == $key_status) ? 'selected' : ''; ?>><?php echo escape($label_status); ?></option><?php endforeach; ?>
                             </select>
                         </div>
                         <div class="lg:col-span-2 xl:col-span-1">
                             <label for="s_search_filter" class="block text-sm font-medium text-gray-700 mb-1"><i class="fas fa-search mr-1 text-gray-400"></i> Пошук</label>
-                            <input type="text" name="s_search" id="s_search_filter" value="<?php echo escape($search_query); ?>" placeholder="ID, ПІБ, Пост..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            <input type="text" name="s_search" id="s_search_filter" value="<?php echo escape($search_query); ?>" placeholder="ID, ПІБ, Пост..." class="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
                         </div>
                     </div>
                     <div class="flex flex-wrap gap-2">
@@ -369,7 +369,7 @@ require_once '../includes/header.php';
             </form>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200/50">
+        <div class="glass-effect rounded-2xl shadow-lg overflow-hidden border border-white/20" style="padding:0;">
             <?php if (empty($shifts_data) && $total_records == 0 && $active_filters_count == 0): ?>
                 <div class="text-center py-16 px-4"><div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4"><i class="fas fa-clipboard text-gray-400 text-3xl"></i></div><h3 class="text-xl font-semibold text-gray-700 mb-2">Ще немає змін</h3><p class="text-gray-500 mb-4">В системі ще не було створено жодної зміни</p></div>
             <?php elseif (empty($shifts_data)): ?>
@@ -392,25 +392,25 @@ require_once '../includes/header.php';
                 </div>
                 
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-white">
+                    <table class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm">
+                        <thead class="bg-white/70">
                             <tr>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">ID</th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Дата</th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Час</th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Тривалість</th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">Лайфгард</th>
-                                <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden md:table-cell">Пост</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Статус</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Тип</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden md:table-cell">Рівень</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden sm:table-cell">Медіа</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Бали</th>
-                                <th class="px-4 py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden sm:table-cell">Дії</th>
-                                <th class="px-2 py-3 text-center sm:hidden"></th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">ID</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Дата</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Час</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Тривалість</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">Лайфгард</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden md:table-cell">Пост</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Статус</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Тип</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden md:table-cell">Рівень</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden sm:table-cell">Медіа</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider">Бали</th>
+                                <th class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center text-xs font-bold text-gray-800 uppercase tracking-wider hidden sm:table-cell">Дії</th>
+                                <th class="px-1 py-2 text-center sm:hidden"></th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white/90 divide-y divide-gray-200" id="shifts-table-body">
+                        <tbody class="bg-white/60 divide-y divide-gray-200" id="shifts-table-body">
                             <?php foreach ($shifts_data as $shift): ?>
                                 <?php
                                 $status_key = $shift['status'] ?? 'unknown';
@@ -429,20 +429,20 @@ require_once '../includes/header.php';
                                 }
                                 $points = (int)($shift['total_points'] ?? 0);
                                 ?>
-                                <tr class="hover:bg-white/80 transition-colors duration-150">
-                                    <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-gray-800 font-semibold">#<?php echo $shift['id']; ?></span></td>
-                                    <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell font-medium text-gray-800"><?php echo format_datetime($shift['start_time'], 'd.m.Y'); ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell text-gray-800"><?php echo format_datetime($shift['start_time'], 'H:i'); ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell text-sm text-gray-800"><?php echo $shift['end_time'] ? format_duration($shift['start_time'], $shift['end_time']) : '<span class="text-gray-500">—</span>'; ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap font-medium text-gray-800 font-semibold"><?php echo escape($shift['lifeguard_name']); ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap hidden md:table-cell text-gray-800"><?php echo escape($shift['post_name']); ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-center">
+                                <tr class="hover:bg-white/40 transition-colors duration-150">
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap"><span class="font-mono text-gray-800 font-semibold">#<?php echo $shift['id']; ?></span></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap hidden lg:table-cell font-medium text-gray-800"><?php echo format_datetime($shift['start_time'], 'd.m.Y'); ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap hidden lg:table-cell text-gray-800"><?php echo format_datetime($shift['start_time'], 'H:i'); ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap hidden lg:table-cell text-sm text-gray-800"><?php echo $shift['end_time'] ? format_duration($shift['start_time'], $shift['end_time']) : '<span class="text-gray-500">—</span>'; ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap font-medium text-gray-800 font-semibold"><?php echo escape($shift['lifeguard_name']); ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap hidden md:table-cell text-gray-800"><?php echo escape($shift['post_name']); ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap text-center">
                                         <span class="px-3 py-1 inline-flex items-center text-xs font-semibold rounded-full bg-gradient-to-r text-white shadow-md <?php echo $status_info['bg']; ?> <?php if(isset($status_info['animate'])) echo 'animate-pulse'; ?>"><i class="fas <?php echo $status_info['icon']; ?> mr-1.5"></i><span class="hidden md:inline"><?php echo escape($status_info['text']); ?></span><?php echo $manual_close_info; ?></span>
                                     </td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-center">
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap text-center">
                                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium <?php echo ($shift['activity_type'] ?? 'shift') === 'training' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'; ?>"><?php echo ($shift['activity_type'] ?? 'shift') === 'training' ? 'Тренування' : 'Зміна'; ?></span>
                                     </td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-center hidden md:table-cell">
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap text-center hidden md:table-cell">
                                         <?php
                                         $assignment_type = escape($shift['lifeguard_assignment_type'] ?? 'N/A');
                                         $assignment_color = 'bg-gray-200 text-gray-800';
@@ -451,24 +451,24 @@ require_once '../includes/header.php';
                                         ?>
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold <?php echo $assignment_color; ?>"><?php echo $assignment_type; ?></span>
                                     </td>
-                                    <td class="px-4 py-3 text-center hidden sm:table-cell"><?php echo render_media_icons($shift); ?></td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-center">
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center hidden sm:table-cell"><?php echo render_media_icons($shift); ?></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 whitespace-nowrap text-center">
                                         <button type="button" class="award-points-btn text-indigo-600 hover:text-indigo-800 font-semibold" data-shift-id="<?php echo $shift['id']; ?>"><span class="<?php if ($points > 0) echo 'text-green-700'; ?>"><?php echo $points ?: '---'; ?></span><i class="fas fa-medal ml-2 text-yellow-500"></i></button>
                                     </td>
-                                    <td class="px-4 py-3 text-center hidden sm:table-cell"><?php echo render_action_buttons($shift['id']); ?></td>
-                                    <td class="px-2 py-3 text-center sm:hidden"><button type="button" class="expand-row-btn text-indigo-600 hover:text-indigo-800" data-shift-id="<?php echo $shift['id']; ?>"><i class="fas fa-chevron-down"></i></button></td>
+                                    <td class="px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-center hidden sm:table-cell"><?php echo render_action_buttons($shift['id']); ?></td>
+                                    <td class="px-1 py-2 text-center sm:hidden"><button type="button" class="expand-row-btn text-indigo-600 hover:text-indigo-800" data-shift-id="<?php echo $shift['id']; ?>"><i class="fas fa-chevron-down"></i></button></td>
                                 </tr>
                                 <tr class="mobile-details-row hidden" id="mobile-details-<?php echo $shift['id']; ?>">
-                                    <td colspan="12" class="bg-gray-50/70 p-3">
-                                        <div class="bg-white rounded-xl border p-4 shadow-sm">
-                                            <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-4 border-b pb-4">
+                                    <td colspan="12" class="bg-gray-50/70 p-2 sm:p-3">
+                                        <div class="bg-white/60 backdrop-blur-md rounded-xl border p-3 sm:p-4 shadow-sm">
+                                            <div class="grid grid-cols-2 gap-x-3 gap-y-2 text-xs sm:text-sm mb-3 sm:mb-4 border-b pb-3 sm:pb-4">
                                                 <div class="col-span-2"><strong>Пост:</strong> <?php echo escape($shift['post_name']); ?></div>
                                                 <div><strong>Дата:</strong> <?php echo format_datetime($shift['start_time'], 'd.m.Y'); ?></div>
                                                 <div><strong>Час:</strong> <?php echo format_datetime($shift['start_time'], 'H:i'); ?> - <?php echo $shift['end_time'] ? format_datetime($shift['end_time'], 'H:i') : '...'; ?></div>
                                                 <div><strong>Тривалість:</strong> <?php echo $shift['end_time'] ? format_duration($shift['start_time'], $shift['end_time']) : '---'; ?></div>
                                                 <div><strong>Рівень:</strong> <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium <?php echo $assignment_color; ?>"><?php echo $assignment_type; ?></span></div>
                                             </div>
-                                            <div class="flex justify-around items-center mb-4 text-center">
+                                            <div class="flex justify-around items-center mb-3 text-center text-xs sm:text-sm">
                                                 <div>
                                                     <div class="text-xs text-gray-500 mb-1">Медіа</div>
                                                     <?php echo render_media_icons($shift); ?>
@@ -512,7 +512,7 @@ require_once '../includes/header.php';
 </div>
 
 <div id="awardPointsModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl relative max-h-[90vh] flex flex-col">
+    <div class="bg-white/80 backdrop-blur-md rounded-lg shadow-xl p-6 w-full max-w-4xl relative max-h-[90vh] flex flex-col">
         <button id="closeAwardPointsModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
         <h2 class="text-xl font-bold mb-4">Нарахування балів за зміну #<span id="modalShiftId"></span></h2>
         <form id="awardPointsForm" class="flex-grow overflow-y-auto">
@@ -559,7 +559,7 @@ require_once '../includes/header.php';
 </div>
 
 <div id="recalculateHoursModal" class="fixed inset-0 z-[60] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all" style="max-height: 90vh;">
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all" style="max-height: 90vh;">
         <div class="p-6 border-b border-gray-200 flex justify-between items-center"><h2 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-calculator text-blue-500 mr-3"></i>Перевірка та розрахунок годин</i></button></div>
         <div class="p-6" style="overflow-y: auto; max-height: calc(90vh - 140px);">
             <div id="hoursModalInitialState">
