@@ -166,6 +166,7 @@ if (!function_exists('format_datetime')) {
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             padding: 1.25rem;
+            min-width: 0;
         }
         
         .stat-card:hover {
@@ -186,21 +187,21 @@ if (!function_exists('format_datetime')) {
 
         @media (max-width: 640px) {
             .stats-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             }
-            
+
             .stat-card {
                 padding: 1rem;
             }
-            
+
             .stat-card i {
                 font-size: 1.25rem;
             }
-            
+
             .stat-card h4 {
                 font-size: 0.875rem;
             }
-            
+
             .stat-card p {
                 font-size: 0.75rem;
             }
