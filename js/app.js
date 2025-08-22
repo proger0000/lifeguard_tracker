@@ -522,6 +522,38 @@ function initializeDynamicContent() {
         
         showAdminTab(initialAdminTab);
     }
+
+    // --- Ініціалізація Вкладок Панелі Директора ---
+    if (document.getElementById('directorTabContent') && typeof showDirectorTab === 'function') {
+        const hash = window.location.hash;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const validDirectorTabs = ['posts', 'analytics', 'rating'];
+        let initialDirectorTab = 'posts';
+
+        if (hash.startsWith('#director-')) {
+            const tabFromHash = hash.substring(10);
+            if (validDirectorTabs.includes(tabFromHash)) {
+                initialDirectorTab = tabFromHash;
+            }
+        } else {
+            const tabFromGet = urlParams.get('tab_director');
+            if (tabFromGet && validDirectorTabs.includes(tabFromGet)) {
+                initialDirectorTab = tabFromGet;
+            }
+        }
+
+        const allDirectorTabs = ['director-posts-content', 'director-analytics-content', 'director-rating-content'];
+        allDirectorTabs.forEach(tabId => {
+            const tab = document.getElementById(tabId);
+            if (tab) {
+                tab.classList.add('hidden');
+                tab.style.display = 'none';
+            }
+        });
+
+        showDirectorTab(initialDirectorTab);
+    }
 }
 
 /**
