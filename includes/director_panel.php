@@ -15,20 +15,20 @@ require_role('director');
         <nav aria-label="Панель директора">
             <ul class="-mb-px flex flex-wrap space-x-1 sm:space-x-2" id="directorTab" role="tablist">
                 <li role="presentation">
-                    <button class="director-tab-button" id="director-posts-tab" type="button" onclick="showDirectorTab('posts')" aria-selected="true">Сітка Постів</button>
+                    <button class="director-tab-button px-4 py-2 text-sm font-medium rounded-t-lg focus:outline-none" id="director-posts-tab" type="button" onclick="showDirectorTab('posts')" aria-selected="true">Сітка Постів</button>
                 </li>
                 <li role="presentation">
-                    <button class="director-tab-button" id="director-analytics-tab" type="button" onclick="showDirectorTab('analytics')" aria-selected="false">Комплексна аналітика</button>
+                    <button class="director-tab-button px-4 py-2 text-sm font-medium rounded-t-lg focus:outline-none" id="director-analytics-tab" type="button" onclick="showDirectorTab('analytics')" aria-selected="false">Комплексна аналітика</button>
                 </li>
                 <li role="presentation">
-                    <button class="director-tab-button" id="director-rating-tab" type="button" onclick="showDirectorTab('rating')" aria-selected="false">Рейтинг</button>
+                    <button class="director-tab-button px-4 py-2 text-sm font-medium rounded-t-lg focus:outline-none" id="director-rating-tab" type="button" onclick="showDirectorTab('rating')" aria-selected="false">Рейтинг</button>
                 </li>
             </ul>
         </nav>
     </div>
 
     <div id="directorTabContent">
-    <div class="director-tab-content" id="director-posts-content" role="tabpanel">
+    <div class="director-tab-content block" id="director-posts-content" role="tabpanel">
         <?php require __DIR__ . '/panels/director_post_grid.php'; ?>
     </div>
     <div class="director-tab-content hidden" id="director-analytics-content" role="tabpanel">
