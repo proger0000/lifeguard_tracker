@@ -282,9 +282,9 @@ function render_action_buttons($shift_id, $is_mobile = false) {
 require_once '../includes/header.php';
 ?>
 
-<div class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-    <div class="w-full px-4 py-6">
-        <div class="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-200/50">
+<div class="min-h-screen bg-transparent">
+    <div class="container mx-auto px-4 py-6">
+        <div class="glass-effect rounded-2xl shadow-xl border border-white/20">
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-800 flex items-center mb-2">
@@ -305,7 +305,7 @@ require_once '../includes/header.php';
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200/50">
+        <div class="glass-effect rounded-2xl shadow-lg border border-white/20">
             <form action="manage_shifts.php" method="GET" id="filtersForm">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-800 flex items-center"><i class="fas fa-filter mr-2 text-indigo-500"></i>Фільтри пошуку</h3>
@@ -369,7 +369,7 @@ require_once '../includes/header.php';
             </form>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200/50">
+        <div class="glass-effect rounded-2xl shadow-lg overflow-hidden border border-white/20" style="padding:0;">
             <?php if (empty($shifts_data) && $total_records == 0 && $active_filters_count == 0): ?>
                 <div class="text-center py-16 px-4"><div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4"><i class="fas fa-clipboard text-gray-400 text-3xl"></i></div><h3 class="text-xl font-semibold text-gray-700 mb-2">Ще немає змін</h3><p class="text-gray-500 mb-4">В системі ще не було створено жодної зміни</p></div>
             <?php elseif (empty($shifts_data)): ?>
@@ -393,7 +393,7 @@ require_once '../includes/header.php';
                 
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-white">
+                        <thead class="bg-white/70">
                             <tr>
                                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider">ID</th>
                                 <th class="px-4 py-3 text-left text-xs font-bold text-gray-800 uppercase tracking-wider hidden lg:table-cell">Дата</th>
@@ -410,7 +410,7 @@ require_once '../includes/header.php';
                                 <th class="px-2 py-3 text-center sm:hidden"></th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white/90 divide-y divide-gray-200" id="shifts-table-body">
+                        <tbody class="bg-white/60 divide-y divide-gray-200" id="shifts-table-body">
                             <?php foreach ($shifts_data as $shift): ?>
                                 <?php
                                 $status_key = $shift['status'] ?? 'unknown';
@@ -429,7 +429,7 @@ require_once '../includes/header.php';
                                 }
                                 $points = (int)($shift['total_points'] ?? 0);
                                 ?>
-                                <tr class="hover:bg-white/80 transition-colors duration-150">
+                                <tr class="hover:bg-white/40 transition-colors duration-150">
                                     <td class="px-4 py-3 whitespace-nowrap"><span class="font-mono text-gray-800 font-semibold">#<?php echo $shift['id']; ?></span></td>
                                     <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell font-medium text-gray-800"><?php echo format_datetime($shift['start_time'], 'd.m.Y'); ?></td>
                                     <td class="px-4 py-3 whitespace-nowrap hidden lg:table-cell text-gray-800"><?php echo format_datetime($shift['start_time'], 'H:i'); ?></td>
@@ -460,7 +460,7 @@ require_once '../includes/header.php';
                                 </tr>
                                 <tr class="mobile-details-row hidden" id="mobile-details-<?php echo $shift['id']; ?>">
                                     <td colspan="12" class="bg-gray-50/70 p-3">
-                                        <div class="bg-white rounded-xl border p-4 shadow-sm">
+                                        <div class="bg-white/60 backdrop-blur-md rounded-xl border p-4 shadow-sm">
                                             <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-4 border-b pb-4">
                                                 <div class="col-span-2"><strong>Пост:</strong> <?php echo escape($shift['post_name']); ?></div>
                                                 <div><strong>Дата:</strong> <?php echo format_datetime($shift['start_time'], 'd.m.Y'); ?></div>
@@ -512,7 +512,7 @@ require_once '../includes/header.php';
 </div>
 
 <div id="awardPointsModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center p-4">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-4xl relative max-h-[90vh] flex flex-col">
+    <div class="bg-white/80 backdrop-blur-md rounded-lg shadow-xl p-6 w-full max-w-4xl relative max-h-[90vh] flex flex-col">
         <button id="closeAwardPointsModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
         <h2 class="text-xl font-bold mb-4">Нарахування балів за зміну #<span id="modalShiftId"></span></h2>
         <form id="awardPointsForm" class="flex-grow overflow-y-auto">
@@ -559,7 +559,7 @@ require_once '../includes/header.php';
 </div>
 
 <div id="recalculateHoursModal" class="fixed inset-0 z-[60] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all" style="max-height: 90vh;">
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all" style="max-height: 90vh;">
         <div class="p-6 border-b border-gray-200 flex justify-between items-center"><h2 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-calculator text-blue-500 mr-3"></i>Перевірка та розрахунок годин</i></button></div>
         <div class="p-6" style="overflow-y: auto; max-height: calc(90vh - 140px);">
             <div id="hoursModalInitialState">
