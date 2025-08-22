@@ -301,8 +301,8 @@ require_once '../includes/header.php';
                       placeholder="Залиште порожнім, якщо не застосовно"><?php echo escape($input_data['manual_close_comment'] ?? ''); ?></textarea>
         </div>
 
-        <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200/50 mt-6">
-            <a href="<?php echo htmlspecialchars($_SESSION['previous_page'] ?? 'manage_shifts.php'); ?>" class="btn-secondary">Скасувати</a>
+        <div class="flex items-center justify-between pt-4 border-t border-gray-200/50 mt-6">
+            <a href="<?php echo htmlspecialchars($_SESSION['previous_page'] ?? 'manage_shifts.php'); ?>" class="btn-red">Скасувати</a>
             <button type="submit" class="btn-green">
                 <i class="fas fa-save mr-2"></i> Зберегти Зміни
             </button>
