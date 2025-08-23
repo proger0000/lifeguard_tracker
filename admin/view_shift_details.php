@@ -16,7 +16,7 @@ $shift_id = filter_input(INPUT_GET, 'shift_id', FILTER_VALIDATE_INT); //
 
 if (!$shift_id) { //
     set_flash_message('помилка', 'Невірний ID зміни.'); //
-    smart_redirect('index.php', [], 'admin-shift-history-content'); // Повертаємо на історію //
+    smart_redirect('admin/manage_shifts.php'); // Повертаємо на керування змінами //
     exit(); //
 }
 
@@ -62,7 +62,7 @@ try {
 
     if (!$shift_details) { //
         set_flash_message('помилка', 'Зміну з ID ' . escape($shift_id) . ' не знайдено.'); //
-        smart_redirect('index.php', [], 'admin-shift-history-content'); //
+        smart_redirect('admin/manage_shifts.php'); //
         exit(); //
     }
 
@@ -96,7 +96,7 @@ try {
 } catch (PDOException $e) {
     error_log("View Shift Details Error (Shift ID: {$shift_id}): " . $e->getMessage()); //
     set_flash_message('помилка', 'Помилка завантаження деталей зміни.'); //
-    smart_redirect('index.php', [], 'admin-shift-history-content'); //
+    smart_redirect('admin/manage_shifts.php'); //
     exit(); //
 }
 
@@ -108,8 +108,8 @@ require_once '../includes/header.php'; //
         <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-2 sm:mb-0 flex items-center">
             <i class="fas fa-clipboard-check mr-3 text-indigo-600"></i> <?php echo escape($page_title); ?>
         </h2>
-        <a href="<?php echo rtrim(APP_URL, '/'); ?>/index.php#admin-shift-history" class="btn-secondary !text-xs !py-1.5 !px-3 self-start sm:self-center">
-            <i class="fas fa-arrow-left mr-1"></i> До Історії Змін
+        <a href="<?php echo rtrim(APP_URL, '/'); ?>/admin/manage_shifts.php" class="btn-secondary !text-xs !py-1.5 !px-3 self-start sm:self-center">
+            <i class="fas fa-arrow-left mr-1"></i> До керування змінами
         </a>
     </div>
 
