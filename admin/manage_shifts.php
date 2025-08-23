@@ -299,7 +299,7 @@ require_once '../includes/header.php';
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button type="button" id="openHoursModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium shadow-lg"><i class="fas fa-calculator mr-2"></i> Розрахунок годин</button>
+                    <button type="button" id="openHoursModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-all duration-200 shadow-lg flex items-center justify-center"><i class="fas fa-calculator mr-2"></i> Розрахунок годин</button>
                 <a href="<?php echo rtrim(APP_URL, '/'); ?>/index.php#admin-duty-content" class="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-5 py-2.5 rounded-lg hover:from-gray-700 hover:to-gray-800 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"><i class="fas fa-arrow-left mr-2"></i> До панелі</a>
                 </div>
             </div>
@@ -559,12 +559,15 @@ require_once '../includes/header.php';
 </div>
 
 <div id="recalculateHoursModal" class="fixed inset-0 z-[60] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
-    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all" style="max-height: 90vh;">
-        <div class="p-6 border-b border-gray-200 flex justify-between items-center"><h2 class="text-xl font-bold text-gray-800 flex items-center"><i class="fas fa-calculator text-blue-500 mr-3"></i>Перевірка та розрахунок годин</i></button></div>
+    <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all text-gray-800" style="max-height: 90vh;">
+        <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+            <h2 class="text-xl font-bold flex items-center"><i class="fas fa-calculator text-blue-500 mr-3"></i>Перевірка та розрахунок годин</h2>
+            <button type="button" class="close-modal-btn text-gray-500 hover:text-gray-700 transition-colors"><i class="fas fa-times text-xl"></i></button>
+        </div>
         <div class="p-6" style="overflow-y: auto; max-height: calc(90vh - 140px);">
             <div id="hoursModalInitialState">
-                <p class="text-gray-600 mb-4">Цей інструмент дозволяє знайти завершені зміни, для яких не були розраховані години, та виправити це.</p>
-                <button id="checkShiftsBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg flex items-center justify-center"><span id="checkShiftsBtnText"><i class="fas fa-search mr-2"></i>Перевірити зміни</span><span id="checkShiftsSpinner" class="hidden"><i class="fas fa-spinner fa-spin mr-2"></i>Пошук...</span></button>
+                <p class="text-gray-700 mb-4">Цей інструмент дозволяє знайти завершені зміни, для яких не були розраховані години, та виправити це.</p>
+                <button id="checkShiftsBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg flex items-center justify-center"><span id="checkShiftsBtnText"><i class="fas fa-search mr-2"></i>Перевірити зміни</span><span id="checkShiftsSpinner" class="hidden"><i class="fas fa-spinner fa-spin mr-2"></i>Пошук...</span></button>
             </div>
             <div id="hoursModalResultsState" class="hidden"></div>
         </div>
@@ -677,9 +680,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoursModalInitialState.classList.add('hidden');
                 hoursModalResultsState.classList.remove('hidden');
                 if (data.success && data.shifts.length > 0) {
-                    let html = `<h3 class="text-lg font-semibold mb-3">Знайдено <span class="text-red-500 font-bold">${data.shifts.length}</span> змін:</h3><div class="max-h-64 overflow-y-auto border rounded-lg p-3 bg-white/20 mb-4">`;
+                    let html = `<h3 class="text-lg font-semibold mb-3">Знайдено <span class="text-red-500 font-bold">${data.shifts.length}</span> змін:</h3><div class="max-h-64 overflow-y-auto border rounded-lg p-3 bg-white/40 mb-4">`;
                     data.shifts.forEach(s => { html += `<div class="flex justify-between p-2 border-b last:border-b-0"><span><span class="font-mono text-indigo-600">#${s.id}</span> ${s.lifeguard_name}</span><span class="text-gray-500">${new Date(s.start_time).toLocaleDateString()}</span></div>`; });
-                    html += `</div><button id="calculateHoursBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center"><i class="fas fa-cogs mr-2"></i>Розрахувати години</button>`;
+                    html += `</div><button id="calculateHoursBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg flex items-center justify-center"><i class="fas fa-cogs mr-2"></i>Розрахувати години</button>`;
                     hoursModalResultsState.innerHTML = html;
                     document.getElementById('calculateHoursBtn').addEventListener('click', handleCalculateHours);
                 } else {
