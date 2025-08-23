@@ -558,8 +558,10 @@ require_once '../includes/header.php';
     </div>
 </div>
 
+
 <div id="recalculateHoursModal" class="fixed inset-0 z-[60] hidden bg-black bg-opacity-60 flex items-center justify-center p-4">
     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all text-gray-800" style="max-height: 90vh;">
+
         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
             <h2 class="text-xl font-bold flex items-center"><i class="fas fa-calculator text-blue-500 mr-3"></i>Перевірка та розрахунок годин</h2>
             <button type="button" class="close-modal-btn text-gray-500 hover:text-gray-700 transition-colors"><i class="fas fa-times text-xl"></i></button>
@@ -680,7 +682,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoursModalInitialState.classList.add('hidden');
                 hoursModalResultsState.classList.remove('hidden');
                 if (data.success && data.shifts.length > 0) {
+
                     let html = `<h3 class="text-lg font-semibold mb-3">Знайдено <span class="text-red-500 font-bold">${data.shifts.length}</span> змін:</h3><div class="max-h-64 overflow-y-auto border rounded-lg p-3 bg-white/40 mb-4">`;
+
                     data.shifts.forEach(s => { html += `<div class="flex justify-between p-2 border-b last:border-b-0"><span><span class="font-mono text-indigo-600">#${s.id}</span> ${s.lifeguard_name}</span><span class="text-gray-500">${new Date(s.start_time).toLocaleDateString()}</span></div>`; });
                     html += `</div><button id="calculateHoursBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg flex items-center justify-center"><i class="fas fa-cogs mr-2"></i>Розрахувати години</button>`;
                     hoursModalResultsState.innerHTML = html;
