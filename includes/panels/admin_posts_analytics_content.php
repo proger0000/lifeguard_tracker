@@ -146,11 +146,65 @@ try {
     $critical_swimmer_details = $critical_details_map['critical_swimmer'] ?? [
         'total_count' => 0, 'male_count' => 0, 'female_count' => 0, 'child_count' => 0
     ];
-    
+
+    // Детальний аналіз критичних плавців
+    $stmt_critical_swimmer_analysis = $pdo->prepare("
+        SELECT
+            p.name AS post_name,
+            COUNT(ri.id) AS total_incidents,
+            AVG(ri.subject_age) AS avg_age,
+            GROUP_CONCAT(ri.cause_details SEPARATOR '||') AS causes_json
+        FROM report_incidents ri
+        JOIN shift_reports sr ON ri.shift_report_id = sr.id
+        JOIN shifts s ON sr.shift_id = s.id
+        JOIN posts p ON s.post_id = p.id
+        WHERE s.start_time BETWEEN :date_start AND :date_end
+          AND ri.incident_type = 'critical_swimmer'
+        GROUP BY p.name
+        ORDER BY total_incidents DESC
+    ");
+    $stmt_critical_swimmer_analysis->execute([':date_start' => $date_range_start_for_sql, ':date_end' => $date_range_end_for_sql]);
+    $critical_swimmer_analysis_raw = $stmt_critical_swimmer_analysis->fetchAll(PDO::FETCH_ASSOC);
+
+    $critical_swimmer_avg_age = null;
+    $critical_swimmer_top_posts = [];
+    $critical_swimmer_top_causes = [];
+    $total_age_sum = 0;
+    $total_incidents_cs = 0;
+    $cause_counts = [];
+
+    foreach ($critical_swimmer_analysis_raw as $row) {
+        $count = (int)$row['total_incidents'];
+        if ($row['avg_age'] !== null) {
+            $total_age_sum += $row['avg_age'] * $count;
+        }
+        $total_incidents_cs += $count;
+
+        if (!empty($row['causes_json'])) {
+            $cause_arrays = explode('||', $row['causes_json']);
+            foreach ($cause_arrays as $jsonStr) {
+                $decoded = json_decode($jsonStr, true);
+                if (is_array($decoded)) {
+                    foreach ($decoded as $cause) {
+                        $cause_counts[$cause] = ($cause_counts[$cause] ?? 0) + 1;
+                    }
+                }
+            }
+        }
+    }
+
+    if ($total_incidents_cs > 0) {
+        $critical_swimmer_avg_age = $total_age_sum / $total_incidents_cs;
+    }
+
+    arsort($cause_counts);
+    $critical_swimmer_top_causes = array_slice($cause_counts, 0, 5, true);
+    $critical_swimmer_top_posts = array_slice($critical_swimmer_analysis_raw, 0, 5);
+
         // Інциденти за категоріями для кругової діаграми
     $stmt_incidents_cat = $pdo->prepare("
-        SELECT 
-            ri.incident_type as category, 
+        SELECT
+            ri.incident_type as category,
             COUNT(ri.id) as incidents_count 
         FROM report_incidents ri
         JOIN shift_reports sr ON ri.shift_report_id = sr.id
@@ -199,10 +253,30 @@ try {
     // Ініціалізація пустими масивами, щоб уникнути помилок у HTML
     $total_stats = $critical_swimmer_details = [];
     $incidents_by_category_data = $visitor_stats_per_post = $post_danger_rating = $lifeguard_performance_hours = $lifeguard_performance_incidents = [];
+    $critical_swimmer_avg_age = null;
+    $critical_swimmer_top_posts = $critical_swimmer_top_causes = [];
 }
 
 function translate_incident_category_uk($key) {
     $translations = [ 'medical_aid' => 'Мед. допомога', 'preventive_work' => 'Профілактика', 'lost_child' => 'Загублена дитина', 'drowning_prevention' => 'Попередження утоплення', 'safety_violation' => 'Порушення безпеки', 'found_object' => 'Знайдено річ', 'other' => 'Інше', 'critical_swimmer' => 'Крит. плавець', 'police_call' => 'Виклик поліції', 'ambulance_call' => 'Виклик швидкої'];
+    return $translations[$key] ?? ucfirst(str_replace('_', ' ', $key));
+}
+
+function translate_cause_detail_uk($key) {
+    $translations = [
+        'alcohol' => "Алкогольне сп'яніння",
+        'exhaustion' => 'Фізичне виснаження',
+        'forbidden_zone' => 'Купання в забороненому місці',
+        'mental_illness' => 'Психічне захворювання',
+        'cramp' => 'Судома',
+        'water_injury' => 'Травмування у воді',
+        'entangled_seaweed' => 'Заплутався у водоростях',
+        'drowning_swallowed' => 'Захлинувся/Потопав',
+        'rule_violation' => 'Порушення правил',
+        'hypothermia' => 'Переохолодження',
+        'disability' => 'Інвалідність',
+        'other' => 'Інше',
+    ];
     return $translations[$key] ?? ucfirst(str_replace('_', ' ', $key));
 }
 $incidents_chart = ['labels' => array_map('translate_incident_category_uk', array_column($incidents_by_category_data, 'category')), 'data' => array_column($incidents_by_category_data, 'incidents_count')];
@@ -297,6 +371,32 @@ $visitors_chart = ['labels' => array_column($visitor_stats_per_post, 'name'), 'b
                         <span class="flex items-center text-gray-700"><i class="fas fa-child text-yellow-500 text-lg mr-3"></i>Діти (до 14 р.)</span>
                         <strong class="text-xl font-bold"><?php echo (int)($critical_swimmer_details['child_count'] ?? 0); ?></strong>
                     </div>
+                </div>
+
+                <div class="mt-6 space-y-3 text-gray-700">
+                    <div>Середній вік: <strong><?php echo $critical_swimmer_avg_age !== null ? number_format($critical_swimmer_avg_age, 1) : '—'; ?></strong></div>
+
+                    <?php if (!empty($critical_swimmer_top_posts)): ?>
+                    <div>
+                        <p class="font-semibold">Топ постів:</p>
+                        <ul class="list-disc list-inside">
+                            <?php foreach ($critical_swimmer_top_posts as $post): ?>
+                                <li><?php echo escape($post['post_name']); ?> (<?php echo (int)$post['total_incidents']; ?>)</li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($critical_swimmer_top_causes)): ?>
+                    <div>
+                        <p class="font-semibold">Топ причин:</p>
+                        <ul class="list-disc list-inside">
+                            <?php foreach ($critical_swimmer_top_causes as $causeKey => $count): ?>
+                                <li><?php echo escape(translate_cause_detail_uk($causeKey)); ?> (<?php echo (int)$count; ?>)</li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 <?php else: ?>
                 <div class="chart-placeholder h-32"><i class="fas fa-check-circle text-green-500"></i><p>Не зафіксовано</p></div>
