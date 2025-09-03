@@ -1,6 +1,6 @@
 <?php /* Файл: includes/footer.php */ ?>
 <footer class="fixed-footer">
-    <div class="container mx-auto text-xs text-center text-white rounded-t-lg px-3 py-1">
+    <div class="container mx-auto text-xs text-center text-white bg-black bg-opacity-70 backdrop-blur-sm rounded-t-lg px-3 py-1">
         © <?php echo date('Y'); ?> Система обліку чергувань KLS. Всі права захищено.
     </div>
 </footer>
