@@ -296,6 +296,61 @@ if (!function_exists('get_role_name_ukrainian')) {
             100% { transform: rotate(360deg); }
         }
 
+        /* ========== Fluid Glass Bar (override) ========== */
+        .fixed-header { --bar-tint: rgba(220, 38, 38, 0.6); }
+        .fixed-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(var(--bar-tint), var(--bar-tint)),
+                linear-gradient(100deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.28) 70%, rgba(255,255,255,0.06) 100%),
+                radial-gradient(120% 180% at 15% 0%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%);
+            background-size: auto, 300% 100%, 200% 100%;
+            background-position: center, 0% 50%, 0% 50%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            filter: url(#fluid-glass-bar);
+            z-index: -1;
+            border-radius: 0 0 0.75rem 0.75rem;
+            animation: glassShine 12s ease-in-out infinite;
+        }
+
+        .fixed-footer { --bar-tint: rgba(15, 23, 42, 0.55); }
+        .fixed-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(var(--bar-tint), var(--bar-tint)),
+                linear-gradient(100deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.22) 70%, rgba(255,255,255,0.06) 100%),
+                radial-gradient(120% 180% at 85% 100%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%);
+            background-size: auto, 300% 100%, 200% 100%;
+            background-position: center, 0% 50%, 100% 50%;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            filter: url(#fluid-glass-bar);
+            z-index: -1;
+            border-radius: 0.75rem 0.75rem 0 0;
+            animation: glassShine 12s ease-in-out infinite;
+        }
+
+        @keyframes glassShine {
+            0% {
+                background-position: center, 0% 50%, 0% 50%;
+            }
+            50% {
+                background-position: center, 100% 50%, 100% 50%;
+            }
+            100% {
+                background-position: center, 0% 50%, 0% 50%;
+            }
+        }
+
     </style>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
