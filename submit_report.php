@@ -203,7 +203,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              $subject_gender = isset($details['subject_gender']) && in_array($details['subject_gender'], ['Чоловік', 'Жінка', 'Невідомо']) ? $details['subject_gender'] : null;
                              $subject_phone = !empty($details['subject_phone']) ? trim($details['subject_phone']) : null;
                              // Для полів, які можуть бути масивами (чекбокси): зберігаємо як JSON або через кому
-                             $cause_details = !empty($details['cause']) ? json_encode($details['cause']) : null; // Приклад для чекбоксів з name="incidents[...][...][cause][]"
+                             // Ensure cause_details is always stored as a valid JSON array
+                             $cause_array = isset($details['cause']) ? (array)$details['cause'] : [];
+                             $cause_details = json_encode(array_values($cause_array), JSON_UNESCAPED_UNICODE);
+                             if ($cause_details === false) {
+                                 $cause_details = '[]';
+                             }
                              $actions_taken = !empty($details['actions']) ? json_encode($details['actions']) : null; // Приклад для чекбоксів
                              $outcome_details = !empty($details['outcome']) ? trim($details['outcome']) : null; // Якщо це одне значення (radio/text)
                              $witness1_name = !empty($details['witness1_name']) ? trim($details['witness1_name']) : null;
@@ -222,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              $stmt_incident->bindParam(':subject_age', $subject_age, $subject_age !== null ? PDO::PARAM_INT : PDO::PARAM_NULL);
                              $stmt_incident->bindParam(':subject_gender', $subject_gender, $subject_gender !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                              $stmt_incident->bindParam(':subject_phone', $subject_phone, $subject_phone !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
-                             $stmt_incident->bindParam(':cause_details', $cause_details, $cause_details !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
+                             $stmt_incident->bindParam(':cause_details', $cause_details, PDO::PARAM_STR);
                              $stmt_incident->bindParam(':actions_taken', $actions_taken, $actions_taken !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                              $stmt_incident->bindParam(':outcome_details', $outcome_details, $outcome_details !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
                              $stmt_incident->bindParam(':witness1_name', $witness1_name, $witness1_name !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);

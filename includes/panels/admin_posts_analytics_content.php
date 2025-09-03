@@ -9,6 +9,8 @@ if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin'
 
 global $pdo;
 
+require_once __DIR__ . '/../analytics_helpers.php';
+
 $page_title_analytics = "Комплексна Аналітика Постів";
 
 // --- БЛОК ФІЛЬТРАЦІЇ ПЕРІОДУ ---
@@ -171,7 +173,7 @@ try {
     $critical_swimmer_top_causes = [];
     $total_age_sum = 0;
     $total_incidents_cs = 0;
-    $cause_counts = [];
+    $causes_raw = [];
 
     foreach ($critical_swimmer_analysis_raw as $row) {
         $count = (int)$row['total_incidents'];
@@ -181,15 +183,7 @@ try {
         $total_incidents_cs += $count;
 
         if (!empty($row['causes_json'])) {
-            $cause_arrays = explode('||', $row['causes_json']);
-            foreach ($cause_arrays as $jsonStr) {
-                $decoded = json_decode($jsonStr, true);
-                if (is_array($decoded)) {
-                    foreach ($decoded as $cause) {
-                        $cause_counts[$cause] = ($cause_counts[$cause] ?? 0) + 1;
-                    }
-                }
-            }
+            $causes_raw = array_merge($causes_raw, explode('||', $row['causes_json']));
         }
     }
 
@@ -197,8 +191,8 @@ try {
         $critical_swimmer_avg_age = $total_age_sum / $total_incidents_cs;
     }
 
-    arsort($cause_counts);
-    $critical_swimmer_top_causes = array_slice($cause_counts, 0, 5, true);
+    $critical_swimmer_cause_stats = calculate_cause_distribution($causes_raw);
+    $critical_swimmer_top_causes = array_slice($critical_swimmer_cause_stats, 0, 5, true);
     $critical_swimmer_top_posts = array_slice($critical_swimmer_analysis_raw, 0, 5);
 
         // Інциденти за категоріями для кругової діаграми
@@ -391,8 +385,8 @@ $visitors_chart = ['labels' => array_column($visitor_stats_per_post, 'name'), 'b
                     <div>
                         <p class="font-semibold">Топ причин:</p>
                         <ul class="list-disc list-inside">
-                            <?php foreach ($critical_swimmer_top_causes as $causeKey => $count): ?>
-                                <li><?php echo escape(translate_cause_detail_uk($causeKey)); ?> (<?php echo (int)$count; ?>)</li>
+                            <?php foreach ($critical_swimmer_top_causes as $causeKey => $data): ?>
+                                <li><?php echo escape(translate_cause_detail_uk($causeKey)); ?> (<?php echo (int)$data['count']; ?>, <?php echo $data['percentage']; ?>%)</li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
