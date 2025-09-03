@@ -497,9 +497,9 @@ function initializeDynamicContent() {
                 initialAdminTab = tabNameFromHash;
             }
         } 
-        // 2. Якщо хеша немає, перевіряємо GET-параметр (tab_admin=...)
+        // 2. Якщо хеша немає, перевіряємо GET-параметри (tab_admin або tab)
         else {
-            const tabFromGet = urlParams.get('tab_admin');
+            const tabFromGet = urlParams.get('tab_admin') || urlParams.get('tab');
             if (tabFromGet && validAdminTabs.includes(tabFromGet)) {
                 initialAdminTab = tabFromGet;
             }
