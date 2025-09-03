@@ -171,14 +171,21 @@ if (!function_exists('get_role_name_ukrainian')) {
             display: flex;
             align-items: center;
             padding: 0 1rem; /* Адаптивний відступ */
-            
-            /* --- Стиль "матового скла" (Frosted Glass) у червоних тонах --- */
-            background: rgba(220, 38, 38, 0.75); /* Напівпрозорий червоний (Tailwind red-600) */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Підтримка Safari */
+            color: white; /* Колір тексту та іконок */
+        }
+
+        .fixed-header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(220, 38, 38, 0.75); /* Напівпрозорий червоний */
             border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Світла межа для ефекту скла */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            color: white; /* Колір тексту та іконок */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            filter: url(#fluid-glass-bar);
+            z-index: -1;
+            border-radius: 0 0 0.75rem 0.75rem;
         }
 
         .fixed-header a, .fixed-header button {
@@ -204,7 +211,7 @@ if (!function_exists('get_role_name_ukrainian')) {
 
         /* Футер */
         .fixed-footer {
-            background: transparent;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -212,6 +219,18 @@ if (!function_exists('get_role_name_ukrainian')) {
             padding-right: var(--safe-area-inset-right);
             padding-bottom: 2px;
             margin-top: auto; /* Додає відступ зверху, щоб футер прилипав до низу */
+        }
+
+        .fixed-footer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            filter: url(#fluid-glass-bar);
+            z-index: -1;
+            border-radius: 0.75rem 0.75rem 0 0;
         }
 
         /* Адаптация для iOS с "монобровью" */
@@ -289,6 +308,16 @@ if (!function_exists('get_role_name_ukrainian')) {
     <script src="<?php echo rtrim(APP_URL, '/'); ?>/js/translations.js" defer></script>
 </head>
     <body class="text-gray-800 flex flex-col min-h-screen font-comfortaa" style="padding-top: var(--safe-area-inset-top); padding-bottom: var(--safe-area-inset-bottom); padding-left: var(--safe-area-inset-left); padding-right: var(--safe-area-inset-right);">
+
+    <!-- SVG filter for fluid glass effect -->
+    <svg style="position: fixed; width: 0; height: 0;">
+        <filter id="fluid-glass-bar">
+            <feTurbulence type="fractalNoise" baseFrequency="0.2" numOctaves="1" seed="2" result="noise">
+                <animate attributeName="baseFrequency" dur="20s" values="0.2;0.25;0.2" repeatCount="indefinite" />
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
 
     <?php if (is_logged_in()): ?>
     <header class="fixed-header">
