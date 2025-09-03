@@ -315,18 +315,18 @@ $visitors_chart = ['labels' => array_column($visitor_stats_per_post, 'name'), 'b
 
     <!-- KPI Cards Section -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-        <div class="kpi-card bg-indigo-500"><i class="fas fa-clipboard-check"></i><div><span>Всього змін</span><strong><?php echo number_format($total_stats['total_shifts'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-yellow-500"><i class="fas fa-users"></i><div><span>На пляжі</span><strong><?php echo number_format($total_stats['total_on_beach'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-blue-500"><i class="fas fa-swimmer"></i><div><span>У воді</span><strong><?php echo number_format($total_stats['total_in_water'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-red-600"><i class="fas fa-first-aid"></i><div><span>Інцидентів</span><strong><?php echo number_format($total_stats['total_incidents'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-red-500"><i class="fas fa-ambulance"></i><div><span>Виклики швидкої</span><strong><?php echo number_format($total_stats['ambulance_calls'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-yellow-500"><i class="fas fa-user-shield"></i><div><span>Виклики поліції</span><strong><?php echo number_format($total_stats['police_calls'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-yellow-600"><i class="fas fa-child"></i><div><span>Загублені діти</span><strong><?php echo number_format($total_stats['lost_child'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-green-500"><i class="fas fa-user-md"></i><div><span>Мед. допомога</span><strong><?php echo number_format($total_stats['medical_aid'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-indigo-400"><i class="fas fa-exclamation-triangle"></i><div><span>Крит. плавець</span><strong><?php echo number_format($total_stats['critical_swimmer'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-green-500"><i class="fas fa-hands-helping"></i><div><span>Профілактика</span><strong><?php echo number_format($total_stats['preventive_actions_count'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-yellow-500"><i class="fas fa-bullhorn"></i><div><span>Освітня робота</span><strong><?php echo number_format($total_stats['educational_activities_count'] ?? 0); ?></strong></div></div>
-        <div class="kpi-card bg-indigo-500"><i class="fas fa-water"></i><div><span>Стрибки з мосту</span><strong><?php echo number_format($total_stats['bridge_jumpers_count'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-clipboard-check text-indigo-500"></i><div><span>Всього змін</span><strong><?php echo number_format($total_stats['total_shifts'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-users text-yellow-500"></i><div><span>На пляжі</span><strong><?php echo number_format($total_stats['total_on_beach'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-swimmer text-blue-500"></i><div><span>У воді</span><strong><?php echo number_format($total_stats['total_in_water'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-first-aid text-red-600"></i><div><span>Інцидентів</span><strong><?php echo number_format($total_stats['total_incidents'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-ambulance text-red-500"></i><div><span>Виклики швидкої</span><strong><?php echo number_format($total_stats['ambulance_calls'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-user-shield text-yellow-500"></i><div><span>Виклики поліції</span><strong><?php echo number_format($total_stats['police_calls'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-child text-yellow-600"></i><div><span>Загублені діти</span><strong><?php echo number_format($total_stats['lost_child'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-user-md text-green-500"></i><div><span>Мед. допомога</span><strong><?php echo number_format($total_stats['medical_aid'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-exclamation-triangle text-indigo-400"></i><div><span>Крит. плавець</span><strong><?php echo number_format($total_stats['critical_swimmer'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-hands-helping text-green-500"></i><div><span>Профілактика</span><strong><?php echo number_format($total_stats['preventive_actions_count'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-bullhorn text-yellow-500"></i><div><span>Освітня робота</span><strong><?php echo number_format($total_stats['educational_activities_count'] ?? 0); ?></strong></div></div>
+        <div class="kpi-card"><i class="fas fa-water text-indigo-500"></i><div><span>Стрибки з мосту</span><strong><?php echo number_format($total_stats['bridge_jumpers_count'] ?? 0); ?></strong></div></div>
     </div>
     
        <!-- Детальна аналітика нижче -->
@@ -554,13 +554,13 @@ $visitors_chart = ['labels' => array_column($visitor_stats_per_post, 'name'), 'b
     color: #000; padding: 1rem 1.25rem; border-radius: 0.75rem;
     display: flex; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 8px 15px -4px rgba(0,0,0,.2); }
-.kpi-card i { font-size: 1.75rem; margin-right: 1rem; opacity: 0.9; color: #000; }
+.kpi-card i { font-size: 1.75rem; margin-right: 1rem; opacity: 0.9; }
 .kpi-card div span { font-size: 0.875rem; line-height: 1.25rem; display: block; font-weight: 500; }
 .kpi-card div strong { font-size: 1.75rem; line-height: 2.25rem; font-weight: 700; }
 .section-title { font-size: 1.25rem; font-weight: 700; color: #fff; margin-top: 2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; }
