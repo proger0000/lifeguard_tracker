@@ -171,7 +171,6 @@ if (!function_exists('get_role_name_ukrainian')) {
             display: flex;
             align-items: center;
             padding: 0 1rem; /* Адаптивний відступ */
-            
             /* --- Стиль "матового скла" (Frosted Glass) у червоних тонах --- */
             background: rgba(220, 38, 38, 0.75); /* Напівпрозорий червоний (Tailwind red-600) */
             backdrop-filter: blur(10px);
@@ -179,6 +178,7 @@ if (!function_exists('get_role_name_ukrainian')) {
             border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Світла межа для ефекту скла */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             color: white; /* Колір тексту та іконок */
+            filter: url(#fluid-glass-bar);
         }
 
         .fixed-header a, .fixed-header button {
@@ -212,6 +212,10 @@ if (!function_exists('get_role_name_ukrainian')) {
             padding-right: var(--safe-area-inset-right);
             padding-bottom: 2px;
             margin-top: auto; /* Додає відступ зверху, щоб футер прилипав до низу */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.4);
+            filter: url(#fluid-glass-bar);
         }
 
         /* Адаптация для iOS с "монобровью" */
@@ -289,6 +293,15 @@ if (!function_exists('get_role_name_ukrainian')) {
     <script src="<?php echo rtrim(APP_URL, '/'); ?>/js/translations.js" defer></script>
 </head>
     <body class="text-gray-800 flex flex-col min-h-screen font-comfortaa" style="padding-top: var(--safe-area-inset-top); padding-bottom: var(--safe-area-inset-bottom); padding-left: var(--safe-area-inset-left); padding-right: var(--safe-area-inset-right);">
+
+    <!-- SVG filter for fluid glass effect -->
+    <svg style="position: fixed; width: 0; height: 0;">
+        <filter id="fluid-glass-bar">
+            <feTurbulence type="fractalNoise" baseFrequency="0.2" numOctaves="1" result="turb" />
+            <feGaussianBlur in="turb" stdDeviation="10" result="blur" />
+            <feBlend in="SourceGraphic" in2="blur" mode="overlay" />
+        </filter>
+    </svg>
 
     <?php if (is_logged_in()): ?>
     <header class="fixed-header">
