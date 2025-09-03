@@ -222,7 +222,7 @@ $visitors_chart = ['labels' => array_column($visitor_stats_per_post, 'name'), 'b
                 </p>
             </div>
             <form action="#analytics-container" method="get" class="flex flex-wrap items-center gap-2" id="analyticsPeriodForm">
-                <input type="hidden" name="tab" value="posts-analytics">
+                <input type="hidden" name="tab_admin" value="posts-analytics">
                 <select name="period_type" id="period_type_selector" class="form-select text-sm rounded-lg border-gray-300 shadow-sm">
                     <option value="today" <?php echo ($selected_period_type === 'today') ? 'selected' : ''; ?>>Сьогодні</option>
                     <option value="week" <?php echo ($selected_period_type === 'week') ? 'selected' : ''; ?>>Цей тиждень</option>
